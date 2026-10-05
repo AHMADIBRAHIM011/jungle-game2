@@ -252,9 +252,9 @@ box-shadow:inset 0 2px 8px rgba(255,255,255,.35),0 8px 20px rgba(0,0,0,.4)}
     <h2 style="margin-top:14px">🐘 إنشاء غرفة جديدة</h2>
     <button id="btnHost" class="btn-grad">أنشئ غرفة وادعُ أصدقاءك 🎯</button>
     <div class="divider">أو</div>
-    <h2>🔑 انضمام برمز غرفة</h2>
-    <input id="onCode" maxlength="5" placeholder="رمز من 5 أحرف مثل X7K2P"
-      style="text-transform:uppercase;letter-spacing:6px;text-align:center;direction:ltr;font-size:18px">
+    <h2>🔑 انضمام برمز الغرفة</h2>
+    <input id="onCode" maxlength="5" inputmode="numeric" autocomplete="off"
+      style="letter-spacing:8px;text-align:center;direction:ltr;font-size:22px;font-weight:900">
     <button id="btnJoin" class="btn-grad" style="background:linear-gradient(135deg,#38bdf8,#0284c7);color:#fff">انضم للغرفة 🔓</button>
     <div id="onStatus" class="ai-note" style="margin-top:12px;text-align:center;min-height:18px"></div>
   </div>
@@ -383,14 +383,13 @@ const PAVATARS=['🐯','🦜','🐸','🐼'];
 const AVCOLORS=[['#f59e0b','#b45309'],['#22c55e','#15803d'],['#38bdf8','#0284c7'],['#f472b6','#db2777']];
 
 let G=null,seq=0,muted=false,AC=null;
-let NET={mode:null};       /* null | 'online-host' | 'online-guest' */
+let NET={mode:null};
 let VIEW=null,lastText='',lastEv='';
 const $=id=>document.getElementById(id);
 function later(ms,fn){const s=seq;setTimeout(()=>{if(s===seq)fn();},ms);}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function cur(){return G.players[G.cur];}
 function handCount(p){return Object.values(p.hand).reduce((a,b)=>a+b,0);}
-function totalSets(){return G.players.reduce((a,p)=>a+p.sets.length,0);}
 function humansCount(){return G?G.players.filter(p=>!p.ai).length:0;}
 function hostIdx(){return G.players.findIndex(p=>p.host);}
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
@@ -498,7 +497,6 @@ function renderPlayers(){
 function renderHand(){
  const p=cur();if(!p)return;
  G&&(G.lastAnim=G.lastAnim||{});
- /* أوراق اللاعبين الآخرين مخفية عن المضيف أونلاين */
  if(p.ai||(NET.mode==='online-host'&&!p.host)){
   $('handTitle').textContent=`🃏 أوراق ${p.name} (مخفية)`;
   $('handRow').innerHTML=Array.from({length:handCount(p)},(_,i)=>`<div class="cardback" style="animation:cardin .4s both;animation-delay:${i*50}ms">🌿</div>`).join('');
@@ -740,9 +738,10 @@ function syncAll(){
   if(p.conn&&p.conn.open){try{p.conn.send({t:'state',pub,you:{idx:i,hand:{...p.hand}}});}catch(e){}}});}
 
 /* ============ الأونلاين — المضيف ============ */
-const CODE_CHARS='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-function genCode(){let s='';for(let i=0;i<5;i++)s+=CODE_CHARS[Math.floor(Math.random()*CODE_CHARS.length)];return s;}
+function genCode(){let s='';for(let i=0;i<5;i++)s+=Math.floor(Math.random()*10);return s;}
 function showOnlineStatus(t){$('onStatus').textContent=t;}
+/* حقل الرمز: أرقام فقط */
+ $('onCode').addEventListener('input',()=>{$('onCode').value=$('onCode').value.replace(/\D/g,'').slice(0,5);});
  $('btnHost').addEventListener('click',()=>{
  if(typeof Peer==='undefined'){showOnlineStatus('تعذر تحميل مكتبة الاتصال — تحقق من الإنترنت');return;}
  const name=($('onName').value.trim())||'المضيف';
@@ -838,9 +837,9 @@ function startOnlineGame(){
 /* ============ الأونلاين — الضيف ============ */
  $('btnJoin').addEventListener('click',()=>{
  if(typeof Peer==='undefined'){showOnlineStatus('تعذر تحميل مكتبة الاتصال — تحقق من الإنترنت');return;}
- const code=($('onCode').value.trim()).toUpperCase();
+ const code=($('onCode').value.trim());
  const name=($('onName').value.trim())||'لاعب';
- if(code.length!==5){showOnlineStatus('❌ أدخل رمزاً من 5 أحرف');return;}
+ if(!/^\d{5}$/.test(code)){showOnlineStatus('❌ أدخل رمزاً من 5 أرقام');return;}
  showOnlineStatus('⏳ جاري الاتصال بالغرفة...');
  const peer=new Peer();
  NET={mode:'online-guest',peer,code,conn:null,names:[]};
