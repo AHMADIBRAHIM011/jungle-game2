@@ -26,8 +26,6 @@ linear-gradient(165deg,#02150c,#052e16 55%,#032b1a);background-attachment:fixed}
 #app{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:12px 14px 24px;min-height:100vh;display:flex;flex-direction:column}
 .screen{display:none}.screen.active{display:flex;flex-direction:column;flex:1}
 .hidden{display:none!important}
-
-/* ===== القائمة ===== */
 .logo-row{display:flex;justify-content:center;gap:12px;font-size:40px;margin-top:30px}
 .logo-row span{animation:float 3s ease-in-out infinite}
 .logo-row span:nth-child(2){animation-delay:.3s}.logo-row span:nth-child(3){animation-delay:.6s}
@@ -44,22 +42,31 @@ font-family:inherit;font-size:15px;font-weight:800;cursor:pointer;transition:.2s
 .opt small{font-weight:600;color:#86efac;font-size:11px}
 .opt:active{transform:scale(.95)}
 .opt.sel{border-color:var(--lime);background:rgba(163,230,53,.12);box-shadow:0 0 20px rgba(163,230,53,.3)}
-.o-ico{display:block;width:48px;height:48px;margin:0 auto 7px;
-filter:drop-shadow(0 4px 10px rgba(163,230,53,.3))}
+.o-ico{display:block;width:48px;height:48px;margin:0 auto 7px;filter:drop-shadow(0 4px 10px rgba(163,230,53,.3))}
 .opt.sel .o-ico{animation:ico-pop .35s}
 @keyframes ico-pop{0%{transform:scale(.8)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
-#namesWrap{margin-top:16px}
-#names input{width:100%;padding:12px 14px;margin-bottom:10px;border-radius:15px;border:2px solid var(--glassb);
+.menu-box input{width:100%;padding:12px 14px;margin-bottom:10px;border-radius:15px;border:2px solid var(--glassb);
 background:rgba(0,0,0,.3);color:#fff;font-family:inherit;font-size:15px;font-weight:700;outline:none;transition:.2s}
-#names input:focus{border-color:var(--green)}
+.menu-box input:focus{border-color:var(--green)}
 .ai-note{color:#86efac;font-weight:700;font-size:13px;margin:-2px 0 10px}
 .btn-grad{width:100%;padding:14px;border:none;border-radius:16px;font-family:inherit;font-size:18px;font-weight:900;color:#04150c;
 cursor:pointer;background:linear-gradient(135deg,#a3e635,#22c55e);box-shadow:0 8px 24px rgba(34,197,94,.4);transition:.15s}
 .btn-grad:active{transform:scale(.96)}
 .btn-ghost{width:100%;margin-top:10px;padding:11px;border:2px solid var(--glassb);border-radius:14px;background:transparent;
 color:#bbf7d0;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer}
-
-/* ===== شاشة اللعب ===== */
+.btn-online{width:100%;padding:13px;border:none;border-radius:18px;font-family:inherit;font-size:16px;font-weight:900;color:#fff;
+cursor:pointer;background:linear-gradient(135deg,#0ea5e9,#22c55e);box-shadow:0 8px 24px rgba(14,165,233,.35);transition:.15s;line-height:1.6;margin-bottom:14px}
+.btn-online small{color:#e0f2fe;font-weight:700;font-size:11.5px}
+.btn-online:active{transform:scale(.96)}
+.divider{display:flex;align-items:center;gap:10px;color:#4ade80;font-weight:800;font-size:12px;margin:14px 0}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--glassb)}
+.roomcode{font-size:38px;font-weight:900;letter-spacing:10px;color:#d9f99d;background:rgba(0,0,0,.3);
+border:2px dashed rgba(163,230,53,.5);border-radius:16px;padding:12px 8px 12px 18px;margin:6px 0 10px;direction:ltr}
+.lobrow{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border-radius:14px;padding:8px 12px;margin-bottom:8px}
+.lobav{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;
+background:linear-gradient(135deg,var(--pc1,#a3e635),var(--pc2,#16a34a))}
+.lobname{font-weight:800;font-size:15px}
+.lobname small{color:#86efac;font-size:11px}
 .ghead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:8px}
 .gtitle{font-weight:900;font-size:18px;letter-spacing:3px;color:#d9f99d;text-shadow:0 0 14px rgba(163,230,53,.4)}
 .btn-exit{display:flex;align-items:center;gap:5px;padding:9px 14px;border-radius:14px;border:1px solid rgba(248,113,113,.4);
@@ -101,7 +108,7 @@ box-shadow:3px 3px 0 #14532d,6px 6px 0 #052e16,0 10px 22px rgba(0,0,0,.45);trans
 font-weight:800;font-size:14.5px;line-height:1.6;min-height:64px;display:flex;align-items:center}
 .msg.pop{animation:mpop .35s}
 @keyframes mpop{0%{transform:scale(.92);opacity:.4}100%{transform:scale(1);opacity:1}}
-.handtitle{font-size:14px;font-weight:900;color:#d9f99d;margin:2px 2px 8px}
+.handtitle{font-size:14px;font-weight:900;color:#d9f99d;margin:2px 2px 8px;min-height:20px}
 .handrow{display:flex;gap:10px;overflow-x:auto;padding:14px 4px 18px;min-height:158px;align-items:center;scrollbar-width:none}
 .handrow::-webkit-scrollbar{display:none}
 .card{position:relative;width:94px;min-width:94px;height:138px;color:#142a1b;border-radius:16px;overflow:hidden;
@@ -121,8 +128,6 @@ font-weight:900;padding:2px 8px;border-radius:20px;box-shadow:0 3px 8px rgba(0,0
 .cardback{width:94px;min-width:94px;height:138px;border-radius:16px;flex-shrink:0;
 background:radial-gradient(circle at 50% 45%,rgba(163,230,53,.25),transparent 60%),repeating-linear-gradient(45deg,#14532d 0 9px,#166534 9px 18px);
 border:3px solid rgba(163,230,53,.4);display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 8px 18px rgba(0,0,0,.35)}
-
-/* ===== النوافذ ===== */
 .ov{position:fixed;inset:0;background:rgba(2,21,12,.8);backdrop-filter:blur(7px);display:flex;
 align-items:center;justify-content:center;z-index:60;padding:20px}
 .ov-box{background:linear-gradient(160deg,#0b3d24,#052e16);border:1px solid var(--glassb);border-radius:26px;
@@ -169,7 +174,8 @@ box-shadow:inset 0 2px 8px rgba(255,255,255,.35),0 8px 20px rgba(0,0,0,.4)}
   <h1 class="title">JUNGLE</h1>
   <p class="subtitle">اجمع 4 أوراق من نفس الحيوان ⭐ أول من يجمع 3 نقاط يفوز! 🏆</p>
   <div class="menu-box">
-    <h2>🎮 كم عدد اللاعبين؟</h2>
+    <button id="btnOnline" class="btn-online">🌐 اللعب أونلاين مع الأصدقاء<br><small>كل لاعب على هاتفه — من أي مكان في العالم!</small></button>
+    <h2>🎮 أو العب محلياً — كم عدد اللاعبين؟</h2>
     <div class="opts">
       <button class="opt" data-n="1">
         <svg class="o-ico" viewBox="0 0 48 48">
@@ -233,6 +239,45 @@ box-shadow:inset 0 2px 8px rgba(255,255,255,.35),0 8px 20px rgba(0,0,0,.4)}
   </div>
 </section>
 
+<!-- ====== شاشة الأونلاين ====== -->
+<section id="screen-online" class="screen">
+  <header class="ghead">
+    <button id="btnOnBack" class="btn-exit">→ رجوع</button>
+    <div class="gtitle">🌐 أونلاين</div>
+    <span style="width:80px"></span>
+  </header>
+  <div class="menu-box">
+    <h2>✍️ اسمك في اللعبة</h2>
+    <input id="onName" maxlength="12" placeholder="اكتب اسمك هنا">
+    <h2 style="margin-top:14px">🐘 إنشاء غرفة جديدة</h2>
+    <button id="btnHost" class="btn-grad">أنشئ غرفة وادعُ أصدقاءك 🎯</button>
+    <div class="divider">أو</div>
+    <h2>🔑 انضمام برمز غرفة</h2>
+    <input id="onCode" maxlength="5" placeholder="رمز من 5 أحرف مثل X7K2P"
+      style="text-transform:uppercase;letter-spacing:6px;text-align:center;direction:ltr;font-size:18px">
+    <button id="btnJoin" class="btn-grad" style="background:linear-gradient(135deg,#38bdf8,#0284c7);color:#fff">انضم للغرفة 🔓</button>
+    <div id="onStatus" class="ai-note" style="margin-top:12px;text-align:center;min-height:18px"></div>
+  </div>
+</section>
+
+<!-- ====== غرفة الانتظار ====== -->
+<section id="screen-lobby" class="screen">
+  <header class="ghead">
+    <button id="btnLobbyLeave" class="btn-exit">✕ خروج</button>
+    <div class="gtitle">🪴 غرفة الانتظار</div>
+    <span style="width:80px"></span>
+  </header>
+  <div class="menu-box" style="text-align:center">
+    <h2>🔑 رمز الغرفة — شاركه مع أصدقائك</h2>
+    <div id="roomCode" class="roomcode">-----</div>
+    <button id="btnShare" class="btn-ghost">📤 مشاركة الرمز</button>
+    <h2 style="margin-top:16px">👥 اللاعبون (<span id="lobCount">1</span>/4)</h2>
+    <div id="lobList"></div>
+    <button id="btnBegin" class="btn-grad" style="margin-top:14px">ابدأ اللعب 🚀</button>
+    <div id="lobWait" class="ai-note" style="display:none;margin-top:12px">⏳ في انتظار بدء المضيف...</div>
+  </div>
+</section>
+
 <!-- ====== شاشة اللعب ====== -->
 <section id="screen-game" class="screen">
   <header class="ghead">
@@ -263,6 +308,16 @@ box-shadow:inset 0 2px 8px rgba(255,255,255,.35),0 8px 20px rgba(0,0,0,.4)}
     <div style="font-size:13px;color:#86efac;font-weight:700;margin-bottom:16px">سيتم إلغاء الجولة الحالية</div>
     <button id="btnExitYes" class="btn-grad" style="background:linear-gradient(135deg,#f87171,#dc2626);color:#fff">نعم، خروج</button>
     <button id="btnExitNo" class="btn-ghost">إلغاء</button>
+  </div>
+</div>
+
+<!-- ====== انقطاع الاتصال ====== -->
+<div id="ov-lost" class="ov hidden">
+  <div class="ov-box">
+    <div class="exq">📡</div>
+    <div class="exq-t" id="lostTitle">انقطع الاتصال</div>
+    <div style="font-size:13px;color:#86efac;font-weight:700;margin-bottom:16px" id="lostSub"></div>
+    <button id="btnLostOk" class="btn-grad">حسناً</button>
   </div>
 </div>
 
@@ -305,6 +360,7 @@ box-shadow:inset 0 2px 8px rgba(255,255,255,.35),0 8px 20px rgba(0,0,0,.4)}
   </div>
 </div>
 
+<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>
 /* ============ البيانات ============ */
 const WIN_PTS=3;
@@ -327,14 +383,18 @@ const PAVATARS=['🐯','🦜','🐸','🐼'];
 const AVCOLORS=[['#f59e0b','#b45309'],['#22c55e','#15803d'],['#38bdf8','#0284c7'],['#f472b6','#db2777']];
 
 let G=null,seq=0,muted=false,AC=null;
+let NET={mode:null};       /* null | 'online-host' | 'online-guest' */
+let VIEW=null,lastText='',lastEv='';
 const $=id=>document.getElementById(id);
 function later(ms,fn){const s=seq;setTimeout(()=>{if(s===seq)fn();},ms);}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function cur(){return G.players[G.cur];}
 function handCount(p){return Object.values(p.hand).reduce((a,b)=>a+b,0);}
-function humansCount(){return G.players.filter(p=>!p.ai).length;}
-function newDeck(){const d=[];ANIMALS.forEach(a=>{for(let i=0;i<4;i++)d.push(a.id);});
-for(let i=d.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[d[i],d[j]]=[d[j],d[i]];}return d;}
+function totalSets(){return G.players.reduce((a,p)=>a+p.sets.length,0);}
+function humansCount(){return G?G.players.filter(p=>!p.ai).length:0;}
+function hostIdx(){return G.players.findIndex(p=>p.host);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function newDeck(){const d=[];ANIMALS.forEach(a=>{for(let i=0;i<4;i++)d.push(a.id);});return shuffle(d);}
 
 /* أوراق متساقطة */
 (function(){const em=['🌿','🍃','🌴','🍃','🌿'];
@@ -361,8 +421,13 @@ d.style.left=Math.random()*100+'vw';d.style.background=cs[i%cs.length];
 const s=6+Math.random()*8;d.style.width=s+'px';d.style.height=s*1.5+'px';
 d.style.animationDuration=(1.8+Math.random()*1.6)+'s';d.style.animationDelay=(Math.random()*.5)+'s';
 document.body.appendChild(d);setTimeout(()=>d.remove(),4000);}}
+function playEv(ev){
+ if(ev==='good')sGood();else if(ev==='bad')sBad();
+ else if(ev==='deal')sDeal();
+ else if(ev==='set'){sSet();confetti(26);}
+ else if(ev==='win'){sWin();confetti(90);}}
 
-/* ============ القائمة ============ */
+/* ============ القائمة المحلية ============ */
 let chosen=0;
 document.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
 chosen=+b.dataset.n;sClick();
@@ -379,12 +444,18 @@ else{for(let i=0;i<chosen;i++)cfg.push({name:($('np'+i).value.trim()||('لاعب
 startGame(cfg);});
  $('btnRules').addEventListener('click',()=>{sClick();$('ov-rules').classList.remove('hidden');});
  $('btnRulesClose').addEventListener('click',()=>$('ov-rules').classList.add('hidden'));
+ $('btnOnline').addEventListener('click',()=>{sClick();showOnlineStatus('');switchScreen('screen-online');});
+ $('btnOnBack').addEventListener('click',()=>{sClick();switchScreen('screen-menu');});
 
-/* ============ بدء اللعبة ============ */
-function switchScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');}
+/* ============ الشاشات ============ */
+let currentScreen='screen-menu';
+function switchScreen(id){currentScreen=id;document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');window.scrollTo(0,0);}
+
+/* ============ بدء لعبة محلية ============ */
 function startGame(cfg){
 seq++;
-G={cfg,players:cfg.map((p,i)=>({name:p.name,ai:p.ai,av:PAVATARS[i],c1:AVCOLORS[i][0],c2:AVCOLORS[i][1],hand:{},sets:[]})),
+NET={mode:null};VIEW=null;
+G={cfg,players:cfg.map((p,i)=>({name:p.name,ai:p.ai,host:i===0,av:PAVATARS[i],c1:AVCOLORS[i][0],c2:AVCOLORS[i][1],hand:{},sets:[],conn:null})),
 deck:newDeck(),cur:0,phase:'idle',sel:null,memory:{},lastAnim:{}};
 const per=G.players.length===4?5:7;
 G.players.forEach(p=>{for(let k=0;k<per;k++){const id=G.deck.pop();p.hand[id]=(p.hand[id]||0)+1;G.lastAnim[id]=true;}});
@@ -395,69 +466,138 @@ msg('تم توزيع الأوراق! 🎴 بالتوفيق في الغابة �
 later(800,afterTurnChange);}
 
 /* ============ الرسم ============ */
-function renderAll(){renderPlayers();renderHand();renderDeck();}
+function guestPhase(){
+ if(!VIEW)return 'wait';
+ const P=VIEW.pub;
+ if(P.over)return 'over';
+ if(P.cur!==VIEW.you.idx)return 'wait';
+ if(P.phase==='remote')return 'select';
+ if(P.phase==='remote-target')return 'target';
+ if(P.phase==='remote-draw')return 'draw';
+ return 'wait';}
+function normPlayers(){
+ if(NET.mode==='online-guest'){
+  const gp=guestPhase();
+  return VIEW.pub.players.map((p,i)=>({name:p.name,ai:p.ai,av:p.av,c1:p.c1,c2:p.c2,sets:p.sets,hc:p.hc,i,
+   turn:i===VIEW.pub.cur,targetable:gp==='target'&&i!==VIEW.you.idx}));}
+ return G.players.map((p,i)=>({name:p.name,ai:p.ai,av:p.av,c1:p.c1,c2:p.c2,sets:p.sets,hc:handCount(p),i,
+  turn:i===G.cur,targetable:G.phase==='target'&&i!==G.cur}));}
+function renderAll(){renderPlayers();renderHand();renderDeck();if(NET.mode==='online-host')syncAll();}
 function renderPlayers(){
-const maxPts=Math.max(...G.players.map(p=>p.sets.length));
- $('playersRow').innerHTML=G.players.map((p,i)=>`
-<div class="pcard ${i===G.cur?'turn':''} ${G.phase==='target'&&i!==G.cur?'targetable':''}" data-i="${i}"
- style="--pc:${p.c1};--pc1:${p.c1};--pc2:${p.c2}">
- <div class="pava">${p.av}${p.sets.length>0&&p.sets.length===maxPts?`<span class="crown">👑</span>`:''}</div>
- <div class="pname">${p.ai?'🤖 ':''}${esc(p.name)}</div>
- <div class="pstats">🃏 ${handCount(p)} &nbsp;⭐ ${p.sets.length}/${WIN_PTS}</div>
- <div class="pchips">${p.sets.map(id=>`<span class="chip" style="--cc:${byId(id).color}">${byId(id).emoji}</span>`).join('')}</div>
-</div>`).join('');}
+ const list=normPlayers();
+ const wp=NET.mode==='online-guest'?(VIEW.pub.winPts||3):WIN_PTS;
+ const maxPts=Math.max(...list.map(p=>p.sets.length));
+ $('playersRow').innerHTML=list.map(p=>`
+ <div class="pcard ${p.turn?'turn':''} ${p.targetable?'targetable':''}" data-i="${p.i}"
+  style="--pc:${p.c1};--pc1:${p.c1};--pc2:${p.c2}">
+  <div class="pava">${p.av}${p.sets.length>0&&p.sets.length===maxPts?`<span class="crown">👑</span>`:''}</div>
+  <div class="pname">${p.ai?'🤖 ':''}${esc(p.name)}</div>
+  <div class="pstats">🃏 ${p.hc} &nbsp;⭐ ${p.sets.length}/${wp}</div>
+  <div class="pchips">${p.sets.map(id=>`<span class="chip" style="--cc:${byId(id).color}">${byId(id).emoji}</span>`).join('')}</div>
+ </div>`).join('');}
 function renderHand(){
-const p=cur();G.lastAnim=G.lastAnim||{};
-if(p.ai){
- $('handTitle').textContent=`🤖 أوراق ${p.name} (مخفية)`;
- $('handRow').innerHTML=Array.from({length:handCount(p)},(_,i)=>`<div class="cardback" style="animation:cardin .4s both;animation-delay:${i*50}ms">🌿</div>`).join('');
- G.lastAnim={};return;}
-const twoP=G.players.length===2;
+ const p=cur();if(!p)return;
+ G&&(G.lastAnim=G.lastAnim||{});
+ /* أوراق اللاعبين الآخرين مخفية عن المضيف أونلاين */
+ if(p.ai||(NET.mode==='online-host'&&!p.host)){
+  $('handTitle').textContent=`🃏 أوراق ${p.name} (مخفية)`;
+  $('handRow').innerHTML=Array.from({length:handCount(p)},(_,i)=>`<div class="cardback" style="animation:cardin .4s both;animation-delay:${i*50}ms">🌿</div>`).join('');
+  G&&(G.lastAnim={});return;}
+ if(NET.mode==='online-guest')return renderHandOnline();
+ const twoP=G.players.length===2;
  $('handTitle').textContent=twoP?`🃏 أوراق ${p.name} — اختر ورقة لتسأل خصمك عنها`:`🃏 أوراق ${p.name} — اختر ورقة ثم لاعباً`;
-const ids=Object.keys(p.hand).filter(id=>p.hand[id]>0).sort((a,b)=>p.hand[b]-p.hand[a]);
+ const ids=Object.keys(p.hand).filter(id=>p.hand[id]>0).sort((a,b)=>p.hand[b]-p.hand[a]);
  $('handRow').innerHTML=ids.map((id,i)=>{const A=byId(id),n=p.hand[id];
-return `<div class="card ${G.sel===id?'sel':''} ${G.lastAnim[id]?'new':''} ${G.phase==='select'?'clickable':''}"
- data-id="${id}" style="--c:${A.color};animation-delay:${i*45}ms">
- <div class="c-wm">🌿</div>
- <div class="c-en">${A.en}</div><div class="c-ar">${A.ar}</div><div class="c-e">${A.emoji}</div>
- ${n>1?`<div class="c-b">×${n}</div>`:''}</div>`;}).join('');
-G.lastAnim={};}
+ return `<div class="card ${G.sel===id?'sel':''} ${G.lastAnim[id]?'new':''} ${G.phase==='select'?'clickable':''}"
+  data-id="${id}" style="--c:${A.color};animation-delay:${i*45}ms">
+  <div class="c-wm">🌿</div>
+  <div class="c-en">${A.en}</div><div class="c-ar">${A.ar}</div><div class="c-e">${A.emoji}</div>
+  ${n>1?`<div class="c-b">×${n}</div>`:''}</div>`;}).join('');
+ G&&(G.lastAnim={});}
+function renderHandOnline(){
+ const gp=guestPhase();
+ let title='⏳ انتظر... دور اللاعبين الآخرين';
+ if(gp==='select')title='🎯 دورك! اختر ورقة من يدك';
+ else if(gp==='target'&&VIEW.sel)title=`سؤالك: ${byId(VIEW.sel).ar} ${byId(VIEW.sel).emoji} — اختر اللاعب المستهدف`;
+ else if(gp==='draw')title='🎣 اضغط كومة المنتصف للسحب';
+ else if(gp==='over')title='🏁 انتهت الجولة';
+ $('handTitle').textContent=title;
+ const hand=VIEW.you.hand||{};
+ const ids=Object.keys(hand).filter(id=>hand[id]>0).sort((a,b)=>hand[b]-hand[a]);
+ $('handRow').innerHTML=ids.map((id,i)=>{const A=byId(id),n=hand[id];
+ return `<div class="card ${VIEW.sel===id?'sel':''} ${gp==='select'?'clickable':''}"
+  data-id="${id}" style="--c:${A.color};animation-delay:${i*45}ms">
+  <div class="c-wm">🌿</div>
+  <div class="c-en">${A.en}</div><div class="c-ar">${A.ar}</div><div class="c-e">${A.emoji}</div>
+  ${n>1?`<div class="c-b">×${n}</div>`:''}</div>`;}).join('');}
 function renderDeck(){
- $('deckCount').textContent=G.deck.length;
- $('deck').classList.toggle('pulse',G.phase==='draw');}
-function msg(t){const m=$('msg');m.textContent=t;m.classList.remove('pop');void m.offsetWidth;m.classList.add('pop');}
+ const n=NET.mode==='online-guest'?VIEW.pub.deckCount:G.deck.length;
+ const pulse=NET.mode==='online-guest'?guestPhase()==='draw':G.phase==='draw';
+ $('deckCount').textContent=n;
+ $('deck').classList.toggle('pulse',pulse);}
+function showMsg(t){const m=$('msg');m.textContent=t;m.classList.remove('pop');void m.offsetWidth;m.classList.add('pop');}
+function msg(t,ev=''){
+ lastText=t;if(NET.mode==='online-host')lastMsgSave={text:t,ev};
+ const m=$('msg');m.textContent=t;m.classList.remove('pop');void m.offsetWidth;m.classList.add('pop');}
+let lastMsgSave={text:'',ev:''};
 
 /* ============ الأحداث ============ */
  $('handRow').addEventListener('click',e=>{
 const c=e.target.closest('.card');if(!c)return;
+const id=c.dataset.id;
+if(NET.mode==='online-guest'){
+ if(guestPhase()!=='select')return;
+ if(!VIEW.you.hand[id])return;
+ sClick();VIEW.sel=id;
+ try{NET.conn.send({t:'pick',animal:id});}catch(err){}
+ return;}
 if(!cur()||cur().ai)return;
 if(G.phase!=='select')return;
-const id=c.dataset.id;if(!cur().hand[id])return;
+if(!cur().hand[id])return;
 sClick();
-if(G.players.length===2){
- resolveAsk(G.cur,1-G.cur,id);}
-else{G.sel=id;G.phase='target';renderHand();renderPlayers();
+if(G.players.length===2){resolveAsk(G.cur,1-G.cur,id);}
+else{G.sel=id;G.phase='target';renderAll();
  msg(`اختر لاعباً لتسأله عن ${byId(id).ar} ${byId(id).emoji}`);}});
  $('playersRow').addEventListener('click',e=>{
 const pc=e.target.closest('.pcard');if(!pc)return;
-if(G.phase!=='target')return;const i=+pc.dataset.i;
+const i=+pc.dataset.i;
+if(NET.mode==='online-guest'){
+ if(guestPhase()!=='target'||i===VIEW.you.idx)return;
+ sClick();try{NET.conn.send({t:'ask',target:i,animal:VIEW.sel});}catch(err){}
+ return;}
+if(!G||G.phase!=='target')return;
 if(i===G.cur)return;sClick();resolveAsk(G.cur,i,G.sel);});
  $('deck').addEventListener('click',()=>{
+if(NET.mode==='online-guest'){
+ if(guestPhase()==='draw'){sClick();try{NET.conn.send({t:'draw'});}catch(err){}}
+ return;}
 if(G&&G.phase==='draw'){G.phase='anim';sClick();drawFor(G.cur);}});
  $('btnSound').addEventListener('click',()=>{muted=!muted;$('btnSound').textContent=muted?'🔇':'🔊';});
  $('btnExit').addEventListener('click',()=>{sClick();$('ov-exit').classList.remove('hidden');});
  $('btnExitNo').addEventListener('click',()=>{sClick();$('ov-exit').classList.add('hidden');});
- $('btnExitYes').addEventListener('click',()=>{seq++;G=null;
- $('ov-exit').classList.add('hidden');$('ov-over').classList.add('hidden');
- $('ov-handoff').classList.add('hidden');switchScreen('screen-menu');});
+ $('btnExitYes').addEventListener('click',()=>{sClick();fullExit();});
+ $('btnLostOk').addEventListener('click',()=>{sClick();$('ov-lost').classList.add('hidden');switchScreen('screen-online');});
 
-/* ============ منطق اللعب ============ */
+function fullExit(){
+ seq++;
+ if(NET.mode==='online-host'&&NET.conns){NET.conns.forEach(c=>{try{c.open&&c.send({t:'hostbye'});}catch(e){}});}
+ try{NET.peer&&NET.peer.destroy();}catch(e){}
+ NET={mode:null};VIEW=null;G=null;
+ ['ov-exit','ov-over','ov-handoff','ov-lost'].forEach(id=>$(id).classList.add('hidden'));
+ switchScreen('screen-menu');}
+
+/* ============ منطق اللعب (المحرك) ============ */
 function afterTurnChange(){
 if(!G||G.phase==='over')return;
-G.sel=null;G.phase='idle';renderAll();
+G.sel=null;
 const p=cur();
-if(p.ai){msg(`🤖 دور ${p.name}...`);later(1100,aiTurn);}
-else if(humansCount()>1)showHandoff(p);
+if(p.ai){G.phase='idle';renderAll();msg(`🤖 دور ${p.name}...`);later(1100,aiTurn);return;}
+if(NET.mode==='online-host'){
+ if(p.host){G.phase='idle';renderAll();beginHuman();syncAll();}
+ else{G.phase='remote';renderAll();}
+ return;}
+G.phase='idle';renderAll();
+if(humansCount()>1)showHandoff(p);
 else beginHuman();}
 function showHandoff(p){
  $('hoAva').textContent=p.av;
@@ -469,10 +609,10 @@ function beginHuman(){
 if(!G||G.phase==='over')return;
 const p=cur();
 if(handCount(p)===0){
- if(G.deck.length>0){G.phase='anim';msg(`📭 لا أوراق لديك — سحبة إجبارية من المنتصف`);later(800,()=>drawFor(G.cur));return;}
+ if(G.deck.length>0){G.phase='anim';msg(`📭 ${p.name} بلا أوراق — سحبة إجبارية من المنتصف`);renderAll();later(800,()=>drawFor(G.cur));return;}
  endTurn();return;}
 G.phase='select';renderAll();
-msg(`🎯 دورك يا ${p.name} — اختر ورقة من يدك`);}
+msg(NET.mode==='online-host'?`🎯 الدور على ${p.name}`:`🎯 دورك يا ${p.name} — اختر ورقة من يدك`);}
 function resolveAsk(ai,ti,animalId){
 if(!G||G.phase==='over')return;
 const asker=G.players[ai],target=G.players[ti],A=byId(animalId);
@@ -480,21 +620,21 @@ G.phase='anim';G.sel=null;G.memory[animalId]=ai;renderAll();
 const n=target.hand[animalId]||0;
 if(n>0){
  target.hand[animalId]=0;asker.hand[animalId]=(asker.hand[animalId]||0)+n;
- if(G.memory[animalId]===ti)delete G.memory[animalId];
  G.lastAnim[animalId]=true;sGood();
- msg(`🎁 ${target.name} سلّم ${asker.name} ${n===1?'ورقة واحدة':n+' أوراق'} من ${A.ar} ${A.emoji}`);
+ msg(`🎁 ${target.name} سلّم ${asker.name} ${n===1?'ورقة واحدة':n+' أوراق'} من ${A.ar} ${A.emoji}`,'good');
  checkSet(asker,animalId);renderAll();
  later(1100,()=>continueTurn(ai));
 }else{
  sBad();
- if(asker.ai){msg(`❌ ${target.name} لا يملك ${A.ar} — ${asker.name} سيسحب من المنتصف`);later(1100,()=>drawFor(ai));}
- else{msg(`❌ ${target.name} لا يملك ${A.ar}! اضغط كومة المنتصف للسحب 🎣`);G.phase='draw';renderDeck();}}}
+ if(asker.ai){msg(`❌ ${target.name} لا يملك ${A.ar} — ${asker.name} سيسحب من المنتصف`,'bad');renderAll();later(1100,()=>drawFor(ai));}
+ else if(NET.mode==='online-host'&&ai!==hostIdx()){msg(`❌ ${target.name} لا يملك ${A.ar}! بانتظار سحبة ${asker.name} 🎣`,'bad');G.phase='remote-draw';renderAll();}
+ else{msg(`❌ ${target.name} لا يملك ${A.ar}! اضغط كومة المنتصف للسحب 🎣`,'bad');G.phase='draw';renderAll();}}}
 function drawFor(i){
 if(!G||G.phase==='over')return;
 const p=G.players[i];
-if(!G.deck.length){msg('المنتصف فارغ! الدور ينتقل');later(800,endTurn);return;}
+if(!G.deck.length){msg('المنتصف فارغ! الدور ينتقل');renderAll();later(800,endTurn);return;}
 const id=G.deck.pop();p.hand[id]=(p.hand[id]||0)+1;G.lastAnim[id]=true;
-sDeal();msg(`🎣 ${p.name} سحب ورقة من المنتصف`);
+sDeal();msg(`🎣 ${p.name} سحب ورقة من المنتصف`,'deal');
 renderAll();
 const c=checkSet(p,id);
 later(1100,()=>{c?continueTurn(i):endTurn();});}
@@ -502,7 +642,7 @@ function checkSet(p,id){
 if(p.hand[id]!==4)return false;
 delete p.hand[id];p.sets.push(id);delete G.memory[id];
 const A=byId(id);sSet();confetti(26);
-msg(`⭐ ${p.name} جمع مجموعة ${A.ar} ${A.emoji} — نقطة كاملة! (${p.sets.length}/${WIN_PTS})`);
+msg(`⭐ ${p.name} جمع مجموعة ${A.ar} ${A.emoji} — نقطة كاملة! (${p.sets.length}/${WIN_PTS})`,'set');
 renderAll();
 if(p.sets.length>=WIN_PTS){G.phase='over';later(1300,showGameOver);}
 return true;}
@@ -510,13 +650,14 @@ function continueTurn(i){
 if(!G||G.phase==='over')return;
 const p=G.players[i];
 if(handCount(p)===0){
- if(G.deck.length>0){msg(`📭 ${p.name} بلا أوراق — سحبة إجبارية`);later(800,()=>drawFor(i));}
+ if(G.deck.length>0){msg(`📭 ${p.name} بلا أوراق — سحبة إجبارية`);renderAll();later(800,()=>drawFor(i));}
  else endTurn();return;}
-if(p.ai){msg(`🤖 ${p.name} يكمل الأسئلة...`);later(1000,aiAsk);}
-else beginHuman();}
+if(p.ai){msg(`🤖 ${p.name} يكمل الأسئلة...`);renderAll();later(1000,aiAsk);return;}
+if(NET.mode==='online-host'&&i!==hostIdx()){G.phase='remote';renderAll();return;}
+beginHuman();}
 function endTurn(){
 if(!G||G.phase==='over')return;
-if(!G.deck.length&&G.players.filter(p=>handCount(p)>0).length<=1){G.phase='over';later(500,showGameOver);return;}
+if(!G.deck.length&&G.players.filter(p=>handCount(p)>0).length<=1){G.phase='over';renderAll();later(500,showGameOver);return;}
 let i=G.cur,guard=0;
 do{i=(i+1)%G.players.length;guard++;}while(handCount(G.players[i])===0&&G.deck.length===0&&guard<=G.players.length+1);
 G.cur=i;afterTurnChange();}
@@ -526,7 +667,7 @@ function aiTurn(){
 if(!G||G.phase==='over')return;
 const p=cur();
 if(handCount(p)===0){
- if(G.deck.length>0){G.phase='anim';msg(`📭 ${p.name} بلا أوراق — سحبة إجبارية`);later(800,()=>drawFor(G.cur));return;}
+ if(G.deck.length>0){G.phase='anim';msg(`📭 ${p.name} بلا أوراق — سحبة إجبارية`);renderAll();later(800,()=>drawFor(G.cur));return;}
  endTurn();return;}
 aiAsk();}
 function aiAsk(){
@@ -544,13 +685,16 @@ if(animal===null){
  target=others[Math.floor(Math.random()*others.length)];}
 const A=byId(animal);
 msg(`🤖 ${me.name} يسأل ${G.players[target].name} عن ${A.ar} ${A.emoji}`);
+renderAll();
 later(1200,()=>resolveAsk(G.cur,target,animal));}
 
-/* ============ النهاية ============ */
+/* ============ نهاية اللعبة ============ */
 function showGameOver(){
 if(!G)return;
 const max=Math.max(...G.players.map(p=>p.sets.length));
 const winners=G.players.filter(p=>p.sets.length===max);
+msg(`🏆 الفائز: ${winners.map(w=>w.name).join(' + ')}!`,'win');
+renderAll();
  $('goTitle').textContent=winners.length>1?'تعادل في الصدارة!':'ملك الغابة!';
  $('goName').textContent=winners.map(w=>w.name).join(' + ');
 const medals=['🥇','🥈','🥉','🎖️'];
@@ -560,12 +704,182 @@ const sorted=[...G.players].sort((a,b)=>b.sets.length-a.sets.length);
  <span>${p.av}</span>
  <span class="gn">${p.ai?'🤖 ':''}${esc(p.name)}</span>
  <span class="gp">⭐ ${p.sets.length}</span></div>`).join('');
- $('ov-over').classList.remove('hidden');
-sWin();confetti(90);}
- $('btnRematch').addEventListener('click',()=>{sClick();$('ov-over').classList.add('hidden');startGame(G.cfg);});
- $('btnMenu2').addEventListener('click',()=>{seq++;G=null;$('ov-over').classList.add('hidden');switchScreen('screen-menu');});
+ $('btnRematch').style.display=(NET.mode==='online-guest')?'none':'block';
+ $('ov-over').classList.remove('hidden');}
+function showOnlineOver(pub){
+if(NET.mode!=='online-guest')return;
+const res=pub.results||[];
+const max=Math.max(...res.map(r=>r.sets));
+const winners=res.filter(r=>r.sets===max);
+ $('goTitle').textContent=winners.length>1?'تعادل في الصدارة!':'ملك الغابة!';
+ $('goName').textContent=winners.map(w=>w.name).join(' + ');
+const medals=['🥇','🥈','🥉','🎖️'];
+ $('goList').innerHTML=res.map((r,i)=>`
+ <div class="gr"><span>${medals[i]||'•'}</span>
+ <span>${r.av}</span>
+ <span class="gn">${esc(r.name)}</span>
+ <span class="gp">⭐ ${r.sets}</span></div>`).join('');
+ $('btnRematch').style.display='none';
+ $('ov-over').classList.remove('hidden');}
+ $('btnRematch').addEventListener('click',()=>{sClick();$('ov-over').classList.add('hidden');
+if(NET.mode==='online-host')startOnlineGame();else if(G&&G.cfg)startGame(G.cfg);});
+ $('btnMenu2').addEventListener('click',()=>{sClick();fullExit();});
 
-/* ============ تفعيل العمل بدون إنترنت ============ */
+/* ============ الأونلاين — مزامنة (المضيف) ============ */
+function pubState(){
+ const over=G.phase==='over';
+ return {
+  players:G.players.map(p=>({name:p.name,av:p.av,c1:p.c1,c2:p.c2,sets:p.sets,hc:handCount(p),ai:false})),
+  cur:G.cur,deckCount:G.deck.length,phase:G.phase,winPts:WIN_PTS,over,
+  results:over?[...G.players].sort((a,b)=>b.sets.length-a.sets.length).map(p=>({name:p.name,av:p.av,sets:p.sets.length})):null,
+  msg:lastMsgSave};}
+function syncAll(){
+ if(!G||NET.mode!=='online-host')return;
+ const pub=pubState();
+ G.players.forEach((p,i)=>{
+  if(p.conn&&p.conn.open){try{p.conn.send({t:'state',pub,you:{idx:i,hand:{...p.hand}}});}catch(e){}}});}
+
+/* ============ الأونلاين — المضيف ============ */
+const CODE_CHARS='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+function genCode(){let s='';for(let i=0;i<5;i++)s+=CODE_CHARS[Math.floor(Math.random()*CODE_CHARS.length)];return s;}
+function showOnlineStatus(t){$('onStatus').textContent=t;}
+ $('btnHost').addEventListener('click',()=>{
+ if(typeof Peer==='undefined'){showOnlineStatus('تعذر تحميل مكتبة الاتصال — تحقق من الإنترنت');return;}
+ const name=($('onName').value.trim())||'المضيف';
+ showOnlineStatus('⏳ جاري إنشاء الغرفة...');
+ const code=genCode();
+ const peer=new Peer('jngl-'+code);
+ peer.on('open',()=>{
+  NET={mode:'online-host',peer,code,conns:[],names:[name],started:false};
+  enterLobby();});
+ peer.on('error',e=>{
+  if(e.type==='unavailable-id'){try{peer.destroy();}catch(x){}$('btnHost').click();}
+  else showOnlineStatus('خطأ في الاتصال: '+e.type);});
+ peer.on('connection',conn=>{
+  conn.on('data',d=>hostOnData(conn,d));
+  conn.on('close',()=>hostOnLeave(conn));});});
+function enterLobby(){switchScreen('screen-lobby');renderLobby();}
+function renderLobby(){
+ const names=NET.names||[];
+ $('roomCode').textContent=NET.code||'-----';
+ $('lobCount').textContent=names.length;
+ $('lobList').innerHTML=names.map((n,i)=>`
+  <div class="lobrow">
+   <span class="lobav" style="--pc1:${AVCOLORS[i][0]};--pc2:${AVCOLORS[i][1]}">${PAVATARS[i]}</span>
+   <span class="lobname">${esc(n)}${i===0?' <small>(المضيف)</small>':''}</span>
+  </div>`).join('');
+ const isHost=NET.mode==='online-host';
+ $('btnBegin').style.display=(isHost&&names.length>=2)?'block':'none';
+ $('lobWait').style.display=(!isHost||names.length<2)?'block':'none';}
+ $('btnShare').addEventListener('click',()=>{
+ const txt=`🎮 العبوا معي JUNGLE 🌿\nرمز الغرفة: ${NET.code}\nافتحوا اللعبة من: ${location.origin+location.pathname}`;
+ if(navigator.share){navigator.share({title:'JUNGLE',text:txt}).catch(()=>{});}
+ else if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>alert('تم نسخ الدعوة ✅')).catch(()=>{});}
+ else alert(txt);});
+ $('btnBegin').addEventListener('click',()=>{sClick();startOnlineGame();});
+ $('btnLobbyLeave').addEventListener('click',()=>{sClick();fullExit();});
+function hostOnData(conn,d){
+ if(!d||!d.t)return;
+ if(!NET.started){
+  if(d.t==='join'){
+   if(NET.names.length>=4){try{conn.send({t:'full'});}catch(e){}setTimeout(()=>{try{conn.close();}catch(e){}},400);return;}
+   NET.conns.push(conn);NET.names.push((d.name||'لاعب').slice(0,12));
+   NET.conns.forEach(c=>{try{c.open&&c.send({t:'lobby',names:NET.names});}catch(e){}});
+   renderLobby();}
+  return;}
+ if(d.t==='join'){try{conn.send({t:'started'});}catch(e){}return;}
+ if(!G)return;
+ const i=G.players.findIndex(p=>p.conn===conn);
+ if(i<0)return;
+ if(d.t==='pick'){
+  if(G.cur!==i||G.phase!=='remote')return;
+  if(!G.players[i].hand[d.animal])return;
+  sClick();
+  if(G.players.length===2){resolveAsk(G.cur,1-G.cur,d.animal);}
+  else{G.sel=d.animal;G.phase='remote-target';renderAll();}}
+ else if(d.t==='ask'){
+  if(G.cur!==i||G.phase!=='remote-target')return;
+  if(d.target===i||!G.players[d.target])return;
+  resolveAsk(G.cur,d.target,d.animal);}
+ else if(d.t==='draw'){
+  if(G.cur!==i||G.phase!=='remote-draw')return;
+  drawFor(G.cur);}}
+function hostOnLeave(conn){
+ if(NET.mode!=='online-host')return;
+ const k=NET.conns.indexOf(conn);
+ if(k>=0){NET.conns.splice(k,1);NET.names.splice(k+1,1);}
+ if(!NET.started){renderLobby();return;}
+ if(!G||G.phase==='over')return;
+ const i=G.players.findIndex(p=>p.conn===conn);
+ if(i<0)return;
+ const nm=G.players[i].name;
+ Object.entries(G.players[i].hand).forEach(([id,c])=>{for(let x=0;x<c;x++)G.deck.unshift(id);});
+ shuffle(G.deck);
+ G.players.splice(i,1);
+ if(i<G.cur)G.cur--;
+ G.cur=((G.cur%G.players.length)+G.players.length)%G.players.length;
+ msg(`📤 ${nm} غادر الغابة`,'bad');
+ if(G.players.length<2){G.phase='over';renderAll();later(600,showGameOver);return;}
+ G.phase='anim';renderAll();
+ later(900,afterTurnChange);}
+function startOnlineGame(){
+ NET.started=true;
+ seq++;
+ G={cfg:null,players:NET.names.map((n,i)=>({name:n,ai:false,host:i===0,av:PAVATARS[i],c1:AVCOLORS[i][0],c2:AVCOLORS[i][1],hand:{},sets:[],conn:i===0?null:NET.conns[i-1]})),
+  deck:newDeck(),cur:0,phase:'idle',sel:null,memory:{},lastAnim:{}};
+ const per=G.players.length===4?5:7;
+ G.players.forEach(p=>{for(let k=0;k<per;k++){const id=G.deck.pop();p.hand[id]=(p.hand[id]||0)+1;}});
+ G.players.forEach(p=>{ANIMALS.forEach(a=>{if(p.hand[a.id]===4){delete p.hand[a.id];p.sets.push(a.id);}});});
+ switchScreen('screen-game');
+ renderAll();
+ msg('بدأت الجولة! 🎴 بالتوفيق للجميع 🌿','good');
+ later(800,afterTurnChange);}
+
+/* ============ الأونلاين — الضيف ============ */
+ $('btnJoin').addEventListener('click',()=>{
+ if(typeof Peer==='undefined'){showOnlineStatus('تعذر تحميل مكتبة الاتصال — تحقق من الإنترنت');return;}
+ const code=($('onCode').value.trim()).toUpperCase();
+ const name=($('onName').value.trim())||'لاعب';
+ if(code.length!==5){showOnlineStatus('❌ أدخل رمزاً من 5 أحرف');return;}
+ showOnlineStatus('⏳ جاري الاتصال بالغرفة...');
+ const peer=new Peer();
+ NET={mode:'online-guest',peer,code,conn:null,names:[]};
+ peer.on('open',()=>{
+  const conn=peer.connect('jngl-'+code,{reliable:true});
+  NET.conn=conn;
+  conn.on('open',()=>{try{conn.send({t:'join',name});}catch(e){}});
+  conn.on('data',guestOnData);
+  conn.on('close',()=>{if(NET.mode==='online-guest')guestLost('انقطع الاتصال بالمضيف');});});
+ peer.on('error',e=>{
+  if(e.type==='peer-unavailable')showOnlineStatus('❌ الغرفة غير موجودة — تحقق من الرمز');
+  else showOnlineStatus('❌ خطأ في الاتصال: '+e.type);});
+ setTimeout(()=>{if(NET.mode==='online-guest'&&!NET.names.length&&currentScreen==='screen-online')
+  showOnlineStatus('⏱ انتهت المهلة — تأكد من الرمز وأن المضيف فاتح اللعبة');},9000);});
+function guestOnData(d){
+ if(!d||!d.t)return;
+ if(d.t==='lobby'){NET.names=d.names;switchScreen('screen-lobby');renderLobby();return;}
+ if(d.t==='full'){showOnlineStatus('❌ الغرفة ممتلئة (الحد 4 لاعبين)');leaveNet();return;}
+ if(d.t==='started'){showOnlineStatus('❌ الجولة بدأت بالفعل في هذه الغرفة');leaveNet();return;}
+ if(d.t==='hostbye'){guestLost('أنهى المضيف الجلسة');return;}
+ if(d.t==='state')applyState(d);}
+function leaveNet(){try{NET.peer&&NET.peer.destroy();}catch(e){}NET={mode:null};VIEW=null;}
+function guestLost(reason){
+ leaveNet();
+ $('lostSub').textContent=reason||'';
+ $('ov-over').classList.add('hidden');
+ $('ov-lost').classList.remove('hidden');
+ switchScreen('screen-game');}
+function applyState(d){
+ VIEW={pub:d.pub,you:d.you,sel:VIEW?VIEW.sel:null};
+ if(currentScreen!=='screen-game')switchScreen('screen-game');
+ if(!d.pub.over)$('ov-over').classList.add('hidden');
+ renderPlayers();renderHandOnline();renderDeck();
+ if(d.pub.msg&&d.pub.msg.text){
+  if(d.pub.msg.text!==lastText){showMsg(d.pub.msg.text);lastText=d.pub.msg.text;}
+  if(d.pub.msg.ev&&d.pub.msg.ev!==lastEv){playEv(d.pub.msg.ev);lastEv=d.pub.msg.ev;}}
+ if(d.pub.over){VIEW=null;showOnlineOver(d.pub);}}
+
+/* ============ العمل بدون إنترنت ============ */
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{
 navigator.serviceWorker.register('./sw.js').catch(()=>{});});}
 </script>
