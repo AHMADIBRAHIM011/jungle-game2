@@ -1,4 +1,4 @@
-const CACHE = 'jungle-v1';
+const CACHE = 'jungle-v2';
 const ASSETS = ['./', './index.html', './manifest.json', './icon.svg'];
 
 self.addEventListener('install', e => {
