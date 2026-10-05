@@ -1,0 +1,16 @@
+{
+  "name": "JUNGLE — لعبة الغابة",
+  "short_name": "JUNGLE",
+  "description": "اجمع 4 أوراق من نفس الحيوان — أول من يجمع 3 نقاط يفوز!",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#052e16",
+  "theme_color": "#052e16",
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
