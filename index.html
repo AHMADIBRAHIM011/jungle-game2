@@ -52,6 +52,7 @@ background:rgba(0,0,0,.3);color:#fff;font-family:inherit;font-size:15px;font-wei
 .btn-grad{width:100%;padding:14px;border:none;border-radius:16px;font-family:inherit;font-size:18px;font-weight:900;color:#04150c;
 cursor:pointer;background:linear-gradient(135deg,#a3e635,#22c55e);box-shadow:0 8px 24px rgba(34,197,94,.4);transition:.15s}
 .btn-grad:active{transform:scale(.96)}
+.btn-grad:disabled{opacity:.55;pointer-events:none}
 .btn-ghost{width:100%;margin-top:10px;padding:11px;border:2px solid var(--glassb);border-radius:14px;background:transparent;
 color:#bbf7d0;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer}
 .btn-online{width:100%;padding:13px;border:none;border-radius:18px;font-family:inherit;font-size:16px;font-weight:900;color:#fff;
@@ -394,6 +395,8 @@ function humansCount(){return G?G.players.filter(p=>!p.ai).length:0;}
 function hostIdx(){return G.players.findIndex(p=>p.host);}
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function newDeck(){const d=[];ANIMALS.forEach(a=>{for(let i=0;i<4;i++)d.push(a.id);});return shuffle(d);}
+/* معرّف فريد لهذا الجهاز — يمنع تكرار انضمام نفس الشخص */
+const MY_CID='c'+Math.random().toString(36).slice(2,10)+Date.now().toString(36);
 
 /* أوراق متساقطة */
 (function(){const em=['🌿','🍃','🌴','🍃','🌿'];
@@ -743,17 +746,19 @@ function showOnlineStatus(t){$('onStatus').textContent=t;}
 /* حقل الرمز: أرقام فقط */
  $('onCode').addEventListener('input',()=>{$('onCode').value=$('onCode').value.replace(/\D/g,'').slice(0,5);});
  $('btnHost').addEventListener('click',()=>{
+ if(NET.hosting)return;
  if(typeof Peer==='undefined'){showOnlineStatus('تعذر تحميل مكتبة الاتصال — تحقق من الإنترنت');return;}
  const name=($('onName').value.trim())||'المضيف';
+ NET.hosting=true;
  showOnlineStatus('⏳ جاري إنشاء الغرفة...');
  const code=genCode();
  const peer=new Peer('jngl-'+code);
  peer.on('open',()=>{
-  NET={mode:'online-host',peer,code,conns:[],names:[name],started:false};
+  NET={mode:'online-host',peer,code,conns:[],names:[name],cids:[null],started:false,hosting:false};
   enterLobby();});
  peer.on('error',e=>{
-  if(e.type==='unavailable-id'){try{peer.destroy();}catch(x){}$('btnHost').click();}
-  else showOnlineStatus('خطأ في الاتصال: '+e.type);});
+  if(e.type==='unavailable-id'){try{peer.destroy();}catch(x){}NET.hosting=false;$('btnHost').click();}
+  else{NET.hosting=false;showOnlineStatus('خطأ في الاتصال: '+e.type);}});
  peer.on('connection',conn=>{
   conn.on('data',d=>hostOnData(conn,d));
   conn.on('close',()=>hostOnLeave(conn));});});
@@ -781,8 +786,23 @@ function hostOnData(conn,d){
  if(!d||!d.t)return;
  if(!NET.started){
   if(d.t==='join'){
+   /* حماية 1: نفس القناة أرسلت join مرتين → تجاهل التكرار */
+   if(NET.conns.includes(conn)){try{conn.send({t:'lobby',names:NET.names});}catch(e){}return;}
+   const cid=d.cid||null;
+   /* حماية 2: نفس الجهاز أعاد الانضمام → استبدل سجله القديم بدلاً من تكراره */
+   if(cid){
+    const oi=NET.cids.indexOf(cid);
+    if(oi>=0){
+     const old=NET.conns[oi];
+     NET.conns[oi]=conn;
+     try{old&&old.close();}catch(e){}
+     NET.conns.forEach(c=>{try{c.open&&c.send({t:'lobby',names:NET.names});}catch(e){}});
+     renderLobby();return;}}
    if(NET.names.length>=4){try{conn.send({t:'full'});}catch(e){}setTimeout(()=>{try{conn.close();}catch(e){}},400);return;}
-   NET.conns.push(conn);NET.names.push((d.name||'لاعب').slice(0,12));
+   /* حماية 3: اسم مكرر من جهاز مختلف → تمييزه تلقائياً */
+   let nm=(d.name||'لاعب').slice(0,12),k=2;
+   while(NET.names.includes(nm)){nm=(d.name||'لاعب').slice(0,12)+' '+k;k++;}
+   NET.conns.push(conn);NET.cids.push(cid);NET.names.push(nm);
    NET.conns.forEach(c=>{try{c.open&&c.send({t:'lobby',names:NET.names});}catch(e){}});
    renderLobby();}
   return;}
@@ -806,7 +826,7 @@ function hostOnData(conn,d){
 function hostOnLeave(conn){
  if(NET.mode!=='online-host')return;
  const k=NET.conns.indexOf(conn);
- if(k>=0){NET.conns.splice(k,1);NET.names.splice(k+1,1);}
+ if(k>=0){NET.conns.splice(k,1);NET.cids.splice(k,1);NET.names.splice(k+1,1);}
  if(!NET.started){renderLobby();return;}
  if(!G||G.phase==='over')return;
  const i=G.players.findIndex(p=>p.conn===conn);
@@ -836,27 +856,34 @@ function startOnlineGame(){
 
 /* ============ الأونلاين — الضيف ============ */
  $('btnJoin').addEventListener('click',()=>{
+ if(NET.joining)return;
  if(typeof Peer==='undefined'){showOnlineStatus('تعذر تحميل مكتبة الاتصال — تحقق من الإنترنت');return;}
  const code=($('onCode').value.trim());
  const name=($('onName').value.trim())||'لاعب';
  if(!/^\d{5}$/.test(code)){showOnlineStatus('❌ أدخل رمزاً من 5 أرقام');return;}
+ /* إغلاق أي محاولة سابقة قبل الجديدة */
+ if(NET.peer){try{NET.peer.destroy();}catch(e){}}
+ NET.joining=true;
  showOnlineStatus('⏳ جاري الاتصال بالغرفة...');
  const peer=new Peer();
- NET={mode:'online-guest',peer,code,conn:null,names:[]};
+ NET={mode:'online-guest',peer,code,conn:null,names:[],joining:true};
  peer.on('open',()=>{
   const conn=peer.connect('jngl-'+code,{reliable:true});
   NET.conn=conn;
-  conn.on('open',()=>{try{conn.send({t:'join',name});}catch(e){}});
+  let joined=false;
+  conn.on('open',()=>{if(joined)return;joined=true;try{conn.send({t:'join',name,cid:MY_CID});}catch(e){}});
   conn.on('data',guestOnData);
   conn.on('close',()=>{if(NET.mode==='online-guest')guestLost('انقطع الاتصال بالمضيف');});});
  peer.on('error',e=>{
+  NET.joining=false;
   if(e.type==='peer-unavailable')showOnlineStatus('❌ الغرفة غير موجودة — تحقق من الرمز');
   else showOnlineStatus('❌ خطأ في الاتصال: '+e.type);});
- setTimeout(()=>{if(NET.mode==='online-guest'&&!NET.names.length&&currentScreen==='screen-online')
-  showOnlineStatus('⏱ انتهت المهلة — تأكد من الرمز وأن المضيف فاتح اللعبة');},9000);});
+ setTimeout(()=>{if(NET.mode==='online-guest'&&!NET.names.length&&currentScreen==='screen-online'){
+  NET.joining=false;
+  showOnlineStatus('⏱ انتهت المهلة — تأكد من الرمز وأن المضيف فاتح اللعبة');}},9000);});
 function guestOnData(d){
  if(!d||!d.t)return;
- if(d.t==='lobby'){NET.names=d.names;switchScreen('screen-lobby');renderLobby();return;}
+ if(d.t==='lobby'){NET.names=d.names;NET.joining=false;switchScreen('screen-lobby');renderLobby();return;}
  if(d.t==='full'){showOnlineStatus('❌ الغرفة ممتلئة (الحد 4 لاعبين)');leaveNet();return;}
  if(d.t==='started'){showOnlineStatus('❌ الجولة بدأت بالفعل في هذه الغرفة');leaveNet();return;}
  if(d.t==='hostbye'){guestLost('أنهى المضيف الجلسة');return;}
